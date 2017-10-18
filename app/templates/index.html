@@ -9,9 +9,13 @@
 
 <!-- Content Block -->
 {% block content %}
-	<!-- Popular movie section  -->
 <main>
-    <div>
+    <div class="container-fluid">
+        <form>
+            <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
+            <input type="submit"  value="Submit" class="btn btn-default">
+        </form>
+	<!-- Popular movie section  -->
         <h3 class='titles'>Popular Movies</h3>
         <ul>
             <div class="row">

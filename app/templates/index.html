@@ -4,18 +4,26 @@
 <!-- Content Block -->
 {% block content %}
 	<!-- Popular movie section  -->
-    <h3>Popular Movies</h3>
-    <ul>
-    	{{ macro.displayMovieList(popular) }}
-    </ul>
-    <!-- Upcoming movie section -->
-    <h3> Upcoming Movies </h3>
-    <ul>
-        {{ macro.displayMovieList(upcoming) }}
-    </ul>
-    <!-- Now showing movie section-->
-    <h3>Now Showing</h3>
-    <ul>
-        {{ macro.displayMovieList(now_showing) }}
-    </ul>
+<main>
+    <div>
+        <h3>Popular Movies</h3>
+        <ul>
+        	{{ macro.displayMovieList(popular) }}
+        </ul>
+    </div>
+        <!-- Upcoming movie section -->
+    <div>
+        <h3> Upcoming Movies </h3>
+        <ul>
+            {{ macro.displayMovieList(upcoming) }}
+        </ul>
+    </div>
+        <!-- Now showing movie section-->
+    <div>
+        <h3>Now Showing</h3>
+        <ul>
+            {{ macro.displayMovieList(now_showing) }}
+        </ul>
+    </div>
+</main>
 {% endblock %}

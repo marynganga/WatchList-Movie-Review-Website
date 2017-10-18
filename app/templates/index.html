@@ -1,14 +1,31 @@
+{% import 'macros.html' as macro %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+
 	{% if title %}
-		<title>{{ title }}</title>
-	{{% else %}}
-		<title> Welcome to the best Movie Review Website</title>
-	{{% endif %}}
+        <title> {{ title }}</title>
+    {% else %}
+        <title> Welcome to the best Movie Review website </title>
+    {% endif %}
+
 </head>
 <body>
-	
+	<!-- Popular movie section  -->
+    <h3>Popular Movies</h3>
+    <ul>
+    	{{ macro.displayMovieList(popular) }}
+    </ul>
+    <!-- Upcoming movie section -->
+    <h3> Upcoming Movies </h3>
+    <ul>
+        {{ macro.displayMovieList(upcoming) }}
+    </ul>
+    <!-- Now showing movie section-->
+    <h3>Now Showing</h3>
+    <ul>
+        {{ macro.displayMovieList(now_showing) }}
+    </ul>
 </body>
 </html>

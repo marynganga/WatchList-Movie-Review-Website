@@ -47,7 +47,6 @@ def process_results(movie_results):
 		# print(posterlink)
 		if poster:
 			movie_object = Movie(id,title,overview,poster,vote_average,vote_count)
-			print(movie_object.image)
 			movie_list.append(movie_object)
 
 	return movie_list

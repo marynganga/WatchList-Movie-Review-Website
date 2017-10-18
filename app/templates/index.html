@@ -11,21 +11,21 @@
 {% block content %}
 	<!-- Popular movie section  -->
 <main>
-    <div>
+    <div style="display: block">
         <h3 class='titles'>Popular Movies</h3>
         <ul>
         	{{ macro.displayMovieList(popular) }}
         </ul>
     </div>
         <!-- Upcoming movie section -->
-    <div>
+    <div style="display: block">
         <h3> Upcoming Movies </h3>
         <ul>
             {{ macro.displayMovieList(upcoming) }}
         </ul>
     </div>
         <!-- Now showing movie section-->
-    <div>
+    <div style="display: block">
         <h3>Now Showing</h3>
         <ul>
             {{ macro.displayMovieList(now_showing) }}

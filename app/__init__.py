@@ -7,6 +7,8 @@ from config import config_options
 # Creating Flask Extensions Instances
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+login_manager = LoginManager()
+
 
 def create_app(config_name):
 	# initialize application
@@ -18,7 +20,7 @@ def create_app(config_name):
 	# initializing flask extensions
 	bootstrap.init_app(app)
 	db.init_app(app)
-	login_manager = LoginManager()
+	login_manager.init_app(app)
 	login_manager.session_protection = 'strong'
 	login_manager.login_view = 'auth.login'
 

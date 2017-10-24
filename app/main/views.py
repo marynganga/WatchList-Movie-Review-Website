@@ -1,9 +1,11 @@
-from flask import render_template, url_for, request, redirect
+from flask import render_template, url_for, request, redirect, abort
 from flask_login import login_required
 from . import main
 from ..models import Review
 from .forms import ReviewForm
 from ..request import get_movies, get_movie, search_movie
+from ..models import User
+
 #Views
 @main.route('/')
 def index():
@@ -58,3 +60,12 @@ def new_review(id):
 
 	title = f'{movie.title} review'
 	return render_template('new_review.html',title = title, review_form = form, movie = movie)
+
+@main.route('/user/<uname>')
+def profile(uname):
+	user = User.query.filter_by(username = uname).first()
+
+	if user is None:
+		abort(404)
+
+	return render_template('profile/profile.html',user=user)

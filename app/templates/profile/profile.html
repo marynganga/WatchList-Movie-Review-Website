@@ -2,6 +2,11 @@
 
 {% block content %}
 <div class="container">	
+	<div>
+		{% if user==current_user %}
+			<a href="{{url_for('main.update_profile',uname=user.username)}}">Edit Profile</a>
+		{% endif %}
+	</div>
 	<div class="row">
 		<!-- displaying username -->
 		<div class="col-md-4">

@@ -1,5 +1,4 @@
 import urllib.request,json
-# from app import app
 from .models import Movie
 
 

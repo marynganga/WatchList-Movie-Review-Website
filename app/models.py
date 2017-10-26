@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 
 class Movie:
@@ -25,35 +26,39 @@ class Movie:
 		self.vote_average = vote_average
 		self.vote_count = vote_count
 
-class Review:
+class Review(db.Model):
 	'''
-    Review class to define Review Objects
-    '''
-	all_reviews = []
-
-	def __init__(self,movie_id,title,imageurl,review):
-		self.movie_id = movie_id
-		self.title = title
-		self.imageurl = imageurl
-		self.review = review
-
+	Review class to define Review Objects
+	'''
+	__tablename__ = 'reviews'
+	id = db.Column(db.Integer,primary_key = True)
+	movie_id = db.Column(db.Integer)
+	movie_title = db.Column(db.String)
+	image_path = db.Column(db.String)
+	movie_review = db.Column(db.String)
+	posted = db.Column(db.DateTime,default=datetime.utcnow)
+	user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
 	def save_review(self):
-		Review.all_reviews.append(self)
+		# Review.all_reviews.append(self)
+		db.session.add(self)
+		db.session.commit()
 
-	@classmethod
-	def clear_reviews(cls):
-		Review.all_reviews.clear()
+	# @classmethod
+	# def clear_reviews(cls):
+	# 	Review.all_reviews.clear()
 
 	@classmethod
 	def get_reviews(cls,id):
-		response = []
+		# response = []
 
-		for review in cls.all_reviews:
-			if review.movie_id == id:
-				response.append(review)
+		# for review in cls.all_reviews:
+		# 	if review.movie_id == id:
+		# 		response.append(review)
 
-		return response
+		# return response
+		reviews = Review.query.filter_by(movie_id=id).all()
+		return reviews 
 
 class User(UserMixin,db.Model):
 	__tablename__ = 'users'
@@ -64,6 +69,7 @@ class User(UserMixin,db.Model):
 	bio = db.Column(db.String(255))
 	profile_pic_path = db.Column(db.String())
 	pass_secure = db.Column(db.String(255))
+	reviews = db.relationship('Review',backref='user',lazy='dynamic')
 
 	@property
 	def password(self):

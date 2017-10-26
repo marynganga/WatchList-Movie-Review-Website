@@ -6,6 +6,7 @@ from .forms import ReviewForm, UpdateProfile
 from ..request import get_movies, get_movie, search_movie
 from ..models import User
 from .. import db,photos
+import markdown2
 
 #Views
 @main.route('/')
@@ -45,6 +46,14 @@ def search(movie_name):
 	searched_movies = search_movie(movie_name_format)
 	title = f'search results for {movie_name}'
 	return render_template('search.html',title=title, movies = searched_movies)
+
+@main.route('/review/<int:id>')
+def single_review(id):
+	review = Review.query.get(id)
+	if review is None:
+		abort(404)
+	format_review = markdown2.markdown(review.movie_review,extras=['code-friendly','fenced-code-blocks'])
+	return render_template('review.html',review=review,format_review=format_review)
 
 @main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
 @login_required

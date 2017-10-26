@@ -18,10 +18,12 @@
 {% macro displayReviews(review_list) %}
 	{% for review in review_list %}
 		
-		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card" style="border:2px solid #ddd;width: 100%">
-	        <h4> {{ review.movie_title }} </h4>
-	        <p> {{ review.movie_review | truncate(60) }}</p>
-    	</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"  style="border:2px solid #ddd;width: 100%;margin: 2px">
+				<p>{{review.user.username}} says</p>
+				<h4 style="padding-left: 10px"><a href="{{url_for('main.single_review',id=review.id)}}">{{ review.movie_title }}</a></h4>
+			</div>
+		</div>
     	
     {% endfor %}
 {% endmacro %}
